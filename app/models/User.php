@@ -50,4 +50,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('User', 'user_follows', 'follow_id', 'user_id');
 	}
 
+	public function clique(){
+		return $this->belongsToMany('Clique');
+	}
+
 }

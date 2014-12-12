@@ -17,4 +17,13 @@ class Post extends Model {
         return $this->belongsTo('User');
     }
 
+    public function clique(){
+        return $this->belongsTo('Clique');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('Comment', 'commentable');
+    }
+
 }

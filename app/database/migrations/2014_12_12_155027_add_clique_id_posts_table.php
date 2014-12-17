@@ -14,7 +14,7 @@ class AddCliqueIdPostsTable extends Migration {
 	{
 		Schema::table('posts', function(Blueprint $table)
 		{
-			$table->integer('clique_id');
+			$table->integer('clique_id')->nullable();
 		});
 	}
 

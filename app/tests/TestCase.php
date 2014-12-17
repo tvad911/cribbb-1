@@ -1,5 +1,7 @@
 <?php
 
+use League\FactoryMuffin\Facade as FactoryMuffin;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
 	/**
@@ -26,6 +28,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	private function prepareForTests()
 	{
 		Artisan::call('migrate');
+	}
+
+	public static function setupBeforeClass()
+	{
+		FactoryMuffin::loadFactories(__DIR__ . '/factories');
+		parent::setupBeforeClass();
+	}
+
+	public static function tearDownAfterClass()
+	{
+		parent::tearDownAfterClass();
+		FactoryMuffin::deleteSaved();
 	}
 
 }

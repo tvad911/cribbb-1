@@ -8,17 +8,27 @@ use Illuminate\Database\Eloquent\Model;
  * @copyright   (c) 2012-2014, Komma Mediadesign
  */
 
-class Post extends Model {
+class Post extends Magniloquent {
 
     protected $fillable = ['body'];
+
+    public static $rules = [
+        'save' => [
+            'body' => 'required',
+            'user_id' => 'required|numeric',
+        ],
+        'create' => [],
+        'update' => [],
+    ];
+
+    public static $factory = [
+        'body' => 'text',
+        'user_id' => 'factory|User',
+    ];
 
     public function user()
     {
         return $this->belongsTo('User');
-    }
-
-    public function clique(){
-        return $this->belongsTo('Clique');
     }
 
     public function comments()

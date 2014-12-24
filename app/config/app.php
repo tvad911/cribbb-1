@@ -124,6 +124,8 @@ return array(
 
 		'Way\Generators\GeneratorsServiceProvider',
 
+		'Cribbb\Storage\StorageServiceProvider',
+
 	),
 
 	/*

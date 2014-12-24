@@ -6,12 +6,13 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-	  	"laravelbook/ardent": "2.*"
+	  	"magniloquent/magniloquent": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",
 	  	"phpunit/phpunit": "4.4.*",
-	  	"league/factory-muffin": "~2.0"
+	  	"zizaco/factory-muff": "dev-master",
+	  	"mockery/mockery": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -20,7 +21,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+		  	"app/lib"
 		]
 	},
 	"scripts": {

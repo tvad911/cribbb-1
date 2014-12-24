@@ -12,6 +12,14 @@ class Comment extends Model{
 
     protected $fillable = ['body'];
 
+    public static $rules = [
+        'body' => 'required',
+    ];
+
+    public static $factory = [
+        'body' => 'text',
+    ];
+
     public function commentable()
     {
         return $this->morphTo();

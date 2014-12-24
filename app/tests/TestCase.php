@@ -30,16 +30,4 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		Artisan::call('migrate');
 	}
 
-	public static function setupBeforeClass()
-	{
-		FactoryMuffin::loadFactories(__DIR__ . '/factories');
-		parent::setupBeforeClass();
-	}
-
-	public static function tearDownAfterClass()
-	{
-		parent::tearDownAfterClass();
-		FactoryMuffin::deleteSaved();
-	}
-
 }

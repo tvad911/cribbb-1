@@ -6,34 +6,37 @@ use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use LaravelBook\Ardent\Ardent;
 
-class User extends Ardent implements UserInterface, RemindableInterface {
+class User extends Magniloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
 	protected $table = 'users';
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
 	protected $hidden = array('password', 'remember_token');
-
-	protected $fillable = ['username', 'email'];
+	protected $fillable = ['username', 'first_name', 'last_name', 'email', 'password', 'password_confirmation'];
 
 	public $autoPurgeRedundantAttributes = true;
 
-	public static $rules = array(
-		'username' => 'required|between:4,16',
-		'email' => 'required|email',
-		'password' => 'required|alpha_num|min:8|confirmed',
-		'password_confirmation' => 'required|alpha_num|min:8',
-	);
+	public static $rules = [
+		"save" => [
+			'username' => 'required',
+			'email' => 'required|email',
+			'password' => 'required|min:8',
+		],
+		"create" => [
+			'username' => 'unique:users',
+			'email' => 'unique:users',
+			'password' => 'confirmed',
+			'password_confirm' => 'min:8',
+		],
+		"update" => []
+	];
+
+	public static $facotry = [
+		'username' => 'string',
+		'email' => 'email',
+		'password' => 'password',
+		'password_confirmation' => 'password',
+	];
 
 	public function posts()
 	{
@@ -48,10 +51,6 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	public function followers()
 	{
 		return $this->belongsToMany('User', 'user_follows', 'follow_id', 'user_id');
-	}
-
-	public function clique(){
-		return $this->belongsToMany('Clique');
 	}
 
 }
